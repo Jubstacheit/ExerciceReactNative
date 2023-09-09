@@ -1,22 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList } from 'react-native';
-import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { TextInput, View, Text, StyleSheet, Pressable } from 'react-native';
+import React, { useState } from 'react';
 
 export default function App() {
+
+
+
+
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Text style={styles.title}>hi welcome to chili's</Text>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+export const styles = StyleSheet.create({
+    container : {
+        flex: 1,
+        display: 'flex',
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 30,
+        marginRight: 40,
+        marginLeft: 40,
+    },
+    title : {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        top: -50,
+    },
 });
