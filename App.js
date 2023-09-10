@@ -1,17 +1,43 @@
-import { StatusBar } from 'expo-status-bar';
-import { useDispatch, useSelector } from 'react-redux';
-import { TextInput, View, Text, StyleSheet, Pressable } from 'react-native';
+import { TextInput, View, Text, StyleSheet, Pressable, Keyboard, ScrollView } from 'react-native';
 import React, { useState } from 'react';
+import List from './src/components/List';
+import ToDo from './src/components/ToDo';
 
 export default function App() {
 
+  const [todos, setTodos] = useState([]);
 
+  const addTodo = (todo) => {
+    if (todo == '') return;
+    setTodos([...todos, todo]);
+    Keyboard.dismiss();
+  }
+
+  const deleteTodo = (deleteIndex) => {
+    setTodos(todos.filter((todo, index) => index != deleteIndex));
+  }
 
 
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>hi welcome to chili's</Text>
+      <Text style={styles.title}>
+        To-do list app
+      </Text>
+      <ScrollView style={styles.scrolling}>
+        {todos.map((todo, index) => {
+          return (
+            <ToDo 
+              style={styles.todo}
+              key={index}
+              todo={todo} 
+              index={index + 1} 
+              deleteTodo={() => deleteTodo(index)} 
+            />
+          )
+        })}
+      </ScrollView>
+      <List addTodo={addTodo} />
     </View>
   );
 }
@@ -19,18 +45,20 @@ export default function App() {
 export const styles = StyleSheet.create({
     container : {
         flex: 1,
-        display: 'flex',
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 30,
-        marginRight: 40,
-        marginLeft: 40,
+        backgroundColor: '#bebebe',
     },
     title : {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 20,
-        top: -50,
+      color:'#000000',
+      fontSize: 30,
+      fontWeight: 'bold',
+      marginTop: 50,
+      marginBottom: 20,
+      marginLeft: 20,
     },
+    scrolling : {
+      marginBottom: 30,
+    },
+    todo : {
+      margin: 40,
+    }
 });
